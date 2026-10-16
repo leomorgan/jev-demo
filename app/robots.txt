@@ -1,0 +1,7 @@
+# Every ?q= URL is a paid Jev decision: crawlers may read the front doors, not search them.
+User-Agent: *
+Allow: /$
+Allow: /energy$
+Allow: /bank$
+Allow: /*/frontends
+Disallow: /*?

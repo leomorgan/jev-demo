@@ -1,0 +1,162 @@
+/* HeroUI v3: Tailwind first, then HeroUI's styles. Energy uses the stock theme; the bank
+   demo re-themes the same components by overriding HeroUI's tokens inside .bank-theme. */
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* A grid without explicit columns gets one `auto` column, which grows to fit its widest unbreakable
+   content (a truncated title, a no-wrap button) and pushes the page sideways. Make it minmax(0, 1fr)
+   instead. Grids with a grid-cols-* class keep theirs, so give breakpoint-only grids grid-cols-1. */
+.grid:not([class*="grid-cols-"]) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Acme Bank: a UI study of a modern UK app bank (Monzo-inspired). Fictional brand, no real
+   bank's name, logo, fonts or assets. Measured reference values: navy #091723, mint #F2F8F3,
+   action teal #016B83; the app's coral card and blue controls are matched by eye.
+   .bank-theme re-themes the HeroUI pieces that remain (the X-ray panel); .mz-* is the app kit. */
+.bank-theme {
+  --mz-navy: #091723;
+  --mz-ink: #091723;
+  --mz-coral: #ff4f40;
+  --mz-coral-dark: #e8392b;
+  --mz-blue: #1d8fc2;
+  --mz-teal: #016b83;
+  --mz-green: #12a150;
+  --mz-mint: #f2f8f3;
+  --mz-app: #ebf1ed;
+  --mz-card: #ffffff;
+  --mz-grey: #6b767d;
+  --mz-line: #e4ebe6;
+  --mz-chip: #e2e9e4;
+
+  /* HeroUI tokens, for the parts still built with HeroUI. HeroUI computes its derived tokens at
+     :root, so they are restated here to pick up the new base colours. */
+  --accent: var(--mz-coral);
+  --accent-foreground: #ffffff;
+  --background: var(--mz-app);
+  --foreground: var(--mz-ink);
+  --surface: #ffffff;
+  --surface-foreground: var(--foreground);
+  --surface-secondary: #f6f9f7;
+  --surface-secondary-foreground: var(--foreground);
+  --surface-tertiary: #eef3f0;
+  --surface-tertiary-foreground: var(--foreground);
+  --overlay-foreground: var(--foreground);
+  --muted: var(--mz-grey);
+  --default: #e8eee9;
+  --default-foreground: var(--foreground);
+  --field-background: var(--mz-mint);
+  --field-placeholder: var(--muted);
+  --border: var(--mz-line);
+  --link: var(--mz-teal);
+  --focus: var(--mz-blue);
+  --radius: 1rem;
+  --field-radius: 0.875rem;
+  --surface-hover: color-mix(in oklab, var(--surface) 92%, var(--surface-foreground) 8%);
+  --background-secondary: color-mix(in oklab, var(--background) 96%, var(--foreground) 4%);
+  --background-tertiary: color-mix(in oklab, var(--background) 92%, var(--foreground) 8%);
+  --background-inverse: var(--foreground);
+  --default-hover: color-mix(in oklab, var(--default) 96%, var(--default-foreground) 4%);
+  --accent-hover: color-mix(in oklab, var(--accent) 90%, var(--accent-foreground) 10%);
+  --field-hover: color-mix(in oklab, var(--field-background) 90%, var(--foreground) 2%);
+  --field-focus: var(--field-background);
+  --field-border-hover: color-mix(in oklab, var(--border) 88%, var(--foreground) 10%);
+  --field-border-focus: color-mix(in oklab, var(--border) 74%, var(--foreground) 22%);
+  --default-soft: color-mix(in oklab, var(--default) 50%, transparent);
+  --default-soft-foreground: var(--default-foreground);
+  --default-soft-hover: color-mix(in oklab, var(--default) 60%, transparent);
+  --accent-soft: color-mix(in oklab, var(--accent) 12%, transparent);
+  --accent-soft-foreground: color-mix(in oklab, var(--accent) 75%, var(--foreground) 25%);
+  --accent-soft-hover: color-mix(in oklab, var(--accent) 18%, transparent);
+  --danger-soft-foreground: color-mix(in oklab, var(--danger) 70%, var(--foreground) 40%);
+  --warning-soft-foreground: color-mix(in oklab, var(--warning) 80%, var(--foreground) 70%);
+  --success-soft-foreground: color-mix(in oklab, var(--success) 80%, var(--foreground) 60%);
+  --separator-secondary: color-mix(in oklab, var(--surface) 85%, var(--surface-foreground) 15%);
+  --separator-tertiary: color-mix(in oklab, var(--surface) 81%, var(--surface-foreground) 19%);
+  --border-secondary: color-mix(in oklab, var(--surface) 78%, var(--surface-foreground) 22%);
+  --border-tertiary: color-mix(in oklab, var(--surface) 66%, var(--surface-foreground) 34%);
+
+  color: var(--mz-ink);
+  font-family: var(--font-mz), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Native controls in the app's style: real inputs, so they work and stay accessible without JS. */
+.mz-switch {
+  appearance: none;
+  flex: none;
+  width: 3.1rem;
+  height: 1.9rem;
+  border-radius: 999px;
+  background: #d5ddd8;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.mz-switch::after {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(9, 23, 35, 0.25);
+  transition: transform 0.2s;
+}
+.mz-switch:checked {
+  background: var(--mz-blue);
+}
+.mz-switch:checked::after {
+  transform: translateX(1.2rem);
+}
+.mz-check,
+.mz-radio {
+  appearance: none;
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #c9d3cd;
+  border-radius: 999px;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  background: #fff;
+}
+.mz-check:checked,
+.mz-radio:checked {
+  border-color: var(--mz-blue);
+  background: var(--mz-blue);
+}
+.mz-check:checked::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.7rem;
+  border: solid #fff;
+  border-width: 0 2.5px 2.5px 0;
+  transform: translateY(-1px) rotate(45deg);
+}
+.mz-radio:checked::after {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #fff;
+}
+.mz-switch:focus-visible,
+.mz-check:focus-visible,
+.mz-radio:focus-visible {
+  outline: 2px solid var(--mz-blue);
+  outline-offset: 2px;
+}
+.mz-scroll {
+  scrollbar-width: none;
+}
+.mz-scroll::-webkit-scrollbar {
+  display: none;
+}

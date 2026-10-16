@@ -1,0 +1,20 @@
+[
+  { "message": "I can't find my card anywhere, I think it was nicked at the pub", "need": "lost_card" },
+  { "message": "My replacement card still hasn't arrived after two weeks", "need": "lost_card", "urgent": false },
+  { "message": "Left my debit card in a cash machine an hour ago", "need": "lost_card", "urgent": true },
+  { "message": "Someone rang saying they were from the bank and now £400 is missing", "need": "fraud", "urgent": true },
+  { "message": "There are three payments to a website I've never heard of", "need": "fraud" },
+  { "message": "Got a text about a held parcel, paid £2.99, now I'm worried it was fake", "need": "fraud" },
+  { "message": "Not lost, my card's right here, but I don't recognise a payment to XYZ LTD", "need": "fraud" },
+  { "message": "I paid for trainers a month ago and they never turned up", "need": "dispute", "care": false },
+  { "message": "The gym keeps taking £30 even though I cancelled in June", "need": "dispute", "care": false },
+  { "message": "I was charged twice at the petrol station this morning", "need": "dispute", "care": false },
+  { "message": "I'm in my overdraft every month and it's really getting to me", "need": "money_worries", "care": true },
+  { "message": "Rent went up and I can't cover everything this month, I'm panicking", "need": "money_worries", "care": true },
+  { "message": "I want to save £2,000 for a wedding next summer", "need": "saving", "care": false },
+  { "message": "Is there a way to put money away automatically on payday?", "need": "saving" },
+  { "message": "How do I change my address?", "need": "other" },
+  { "message": "Can I get a statement for my mortgage application?", "need": "other" },
+  { "message": "Hi, I need some help with my account", "need": "clarify" },
+  { "message": "Something's come up, can someone get back to me?", "need": "clarify" }
+]
